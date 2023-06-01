@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+.task {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin: 8px 30%;
+    border: 1px solid #ccc;
+}
+label {
+    font-weight: bold;
+    font-size: 16px;
+}
+p {
+    margin: 10px 0;
+    margin-left: 36px;
+}
+/*Checkbox*/
+.custom-checkbox {
+    position: absolute;
+    opacity: 0;
+}
+.custom-checkbox + label {
+    cursor: pointer;
+    text-decoration: none;
+}
+.custom-checkbox + label:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #c6ded4;
+    background-color: #fff;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.custom-checkbox:checked + label:before {
+    background-color: #c6ded4;
+}
+.custom-checkbox:checked + label:before {
+    content: "\2713"; /* Código de caracter Unicode del icono de check */
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    line-height: 16px;
+}
+.custom-checkbox:checked + .custom-label {
+    text-decoration: line-through; /* Tachar el texto cuando esté marcado */
+}
+/*Button*/
+button {
+    background-color: #c6ded4;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+input, textarea {
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+    margin-bottom: 10px;
+}

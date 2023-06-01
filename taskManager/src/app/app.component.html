@@ -1,0 +1,31 @@
+<router-outlet></router-outlet>
+<h1>{{title}}</h1>
+<div style="margin: 0 30%;">
+  <div>
+    <label for="title">Título:</label>
+    <input type="text" id="title" [(ngModel)]="newTask.title" placeholder="Título de la tarea">
+  </div>
+  <div>
+    <label for="description">Descripción:</label>
+    <textarea id="description" [(ngModel)]="newTask.description" placeholder="Descripción de la tarea"></textarea>
+  </div>
+  <div style="display: flex; justify-content: end;">
+    <button (click)="createTask()">
+      Crear tarea&nbsp;&nbsp;
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="task" *ngFor="let task of tasks">
+  <input id="myCheckbox{{task.id}}" class="custom-checkbox" type="checkbox" [checked]="task.done" (change)="updateTask(task.id, task.done)">
+  <label for="myCheckbox{{task.id}}" class="custom-label">&nbsp;&nbsp;{{task.title}}</label>
+  <p>{{task.description}}</p>
+  <div style="display: flex; justify-content: end;">
+    <button (click)="deleteTask(task.id)">
+      Eliminar&nbsp;&nbsp;
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+</div>
+<!--Iconos-->
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" integrity="tu-clave-de-api" crossorigin="anonymous">
