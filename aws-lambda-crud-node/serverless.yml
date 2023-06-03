@@ -1,19 +1,19 @@
-service: aws-lambda-crud-node #Nombre del servicio
-frameworkVersion: '3' #Version del framework
+service: aws-lambda-crud-node # Nombre del servicio
+frameworkVersion: '3' # Version del framework
 
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1 #Region de AWS
+  region: us-east-1 # Region de AWS
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:* #Permisos para acceder a DynamoDB
+        - dynamodb:* # Permisos para acceder a DynamoDB
       Resource: "arn:aws:dynamodb:us-east-1:466906930597:table/TaskTable"
 
 functions:
   api:
-    handler: src/index.handler #Nombre del archivo y la funcion
+    handler: src/index.handler # Nombre del archivo y la funcion
     events:
       - httpApi:
           path: /
@@ -25,6 +25,8 @@ functions:
       - httpApi:
           path: /task
           method: post
+          cors:
+            origin: '*'
   # Funcion para obtener todas las tareas
   getTasks:
     handler: src/getTasks.getTasks
@@ -32,6 +34,8 @@ functions:
       - httpApi:
           path: /task
           method: get
+          cors:
+            origin: '*'
   # Funcion para obtener una tarea por id
   getTask:
     handler: src/getTask.getTask
@@ -39,6 +43,8 @@ functions:
       - httpApi:
           path: /task/{id}
           method: get
+          cors:
+            origin: '*'
   # Funcion para actualizar una tarea
   updateTask:
     handler: src/updateTask.updateTask
@@ -46,6 +52,8 @@ functions:
       - httpApi:
           path: /task/{id}
           method: put
+          cors:
+            origin: '*'
   # Funcion para eliminar una tarea
   deleteTask:
     handler: src/deleteTask.deleteTask
@@ -53,17 +61,19 @@ functions:
       - httpApi:
           path: /task/{id}
           method: delete
+          cors:
+            origin: '*'
 
 resources:
   Resources:
-    TaskTable: 
+    TaskTable: # Nombre de la tabla
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: TaskTable
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
+        TableName: TaskTable # Nombre de la tabla
+        BillingMode: PAY_PER_REQUEST # Modo de pago
+        AttributeDefinitions: # Definicion de atributos
           - AttributeName: id
             AttributeType: S
-        KeySchema:
+        KeySchema: # Definicion de llave
           - AttributeName: id
             KeyType: HASH

@@ -1,22 +1,26 @@
-const AWS = require("aws-sdk");
+// Código para obtener una tarea de la base de datos
+const AWS = require("aws-sdk"); // Modulo para conectarse a DynamoDB
 
 const getTask = async (event) => {
+    try {
+        const dynamoDB = new AWS.DynamoDB.DocumentClient();
+        const {id} = event.pathParameters; // Se obtiene el id de la tarea a obtener
 
-    const dynamoDB = new AWS.DynamoDB.DocumentClient();
-    const {id} = event.pathParameters;
+        const result = await dynamoDB.get({
+            TableName: "TaskTable",
+            Key: {
+                id
+            }
+        }).promise(); // Se obtiene la tarea de la base de datos
 
-    const result = await dynamoDB.get({
-        TableName: "TaskTable",
-        Key: {
-            id
+        const task = result.Item; // Se obtiene la tarea de la respuesta
+
+        return {
+            status: 200,
+            body: task
         }
-    }).promise();
-
-    const task = result.Item;
-
-    return {
-        status: 200,
-        body: task
+    } catch (error) {
+        console.log(error);
     }
 }
 

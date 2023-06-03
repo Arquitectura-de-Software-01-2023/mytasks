@@ -1,3 +1,4 @@
+// Ejemplo de código para crear una función lambda en AWS
 module.exports.handler = async (event) => {
   return {
     statusCode: 200,
